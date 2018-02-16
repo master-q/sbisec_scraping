@@ -294,16 +294,21 @@ if __name__ == '__main__':
             #w = list(map(row2list, contents))
             #print(w)
             # "ポートフォリオ"ページ
-            print('"ポートフォリオ"ページ')
+            print('ポートフォリオ"ページ')
+            funds = {}
             pf = sec.fetch_portfolio_page()
             trs = pf.xpath('/html/body/div[3]/div'
                            '/table/tr/td/table[4]/tr[2]/td/table/tr')
             matrix = list(map(row2list, trs))
-            print(matrix)
             trs = pf.xpath('/html/body/div[3]/div'
                            '/table/tr/td/table[4]/tr[6]/td/table/tr')
-            matrix = list(map(row2list, trs))
-            print(matrix)
+            matrix += list(map(row2list, trs))
+            for f in matrix:
+                if f[0] != '取引':
+                    funds[f[1]] = funds.get(f[1], 0) + int(f[10].replace(",", "").split(".")[0])
+            total = sum(funds.values())
+            for k, v in funds.items():
+                print(v * 100 / total, k)
             # 保有証券資産
             #print('保有証券資産')
             #myStocks = sec.portfolio_assets()
