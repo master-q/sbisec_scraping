@@ -288,11 +288,11 @@ if __name__ == '__main__':
     if r.status_code == requests.codes.ok:
         try:
             #
-            print('ログイン後のホームページ')
+            #print('ログイン後のホームページ')
             tp = sec.get_top_page()
-            contents = tp.xpath('//form/table[3]/tr/td/table/tr')
-            w = list(map(row2list, contents))
-            print(w)
+            #contents = tp.xpath('//form/table[3]/tr/td/table/tr')
+            #w = list(map(row2list, contents))
+            #print(w)
             # "ポートフォリオ"ページ
             print('"ポートフォリオ"ページ')
             pf = sec.fetch_portfolio_page()
@@ -300,13 +300,17 @@ if __name__ == '__main__':
                            '/table/tr/td/table[4]/tr[2]/td/table/tr')
             matrix = list(map(row2list, trs))
             print(matrix)
+            trs = pf.xpath('/html/body/div[3]/div'
+                           '/table/tr/td/table[4]/tr[6]/td/table/tr')
+            matrix = list(map(row2list, trs))
+            print(matrix)
             # 保有証券資産
-            print('保有証券資産')
-            myStocks = sec.portfolio_assets()
-            trs = myStocks.xpath('//form/table[2]/tr[1]/td[2]'
-                                 '/table[6]/tr/td/table/tr')
-            tr = list(map(row2list, trs))
-            print(tr)
+            #print('保有証券資産')
+            #myStocks = sec.portfolio_assets()
+            #trs = myStocks.xpath('//form/table[2]/tr[1]/td[2]'
+            #                     '/table[6]/tr/td/table/tr')
+            #tr = list(map(row2list, trs))
+            #print(tr)
             # 注文
             #print('注文')
             #so = sec.stocks_sell_order(4689, 100, 500)
