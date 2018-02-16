@@ -2,4 +2,4 @@
 
 ## ライセンス
 
-GPLv3 or later
+MIT
